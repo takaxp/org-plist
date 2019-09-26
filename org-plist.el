@@ -63,7 +63,7 @@
                        (when options
                          (org-plist--update (eval plist) options)
                          (setq result (eval plist)))
-                     (user-error "variable `%s' is not loaded" plist)))))
+                     (user-error "Variable `%s' is not loaded" plist)))))
       ;; visual feedback and send the result to `org-ctrl-c-ctrl-c'
       (when result (message "%S" result)))))
 
