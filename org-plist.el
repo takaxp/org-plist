@@ -4,7 +4,7 @@
 
 ;; Author: Takaaki ISHIKAWA <takaxp at ieee dot org>
 ;; Keywords: convenience
-;; Version: 0.0.2
+;; Version: 0.0.3
 ;; Maintainer: Takaaki ISHIKAWA <takaxp at ieee dot org>
 ;; URL: https://github.com/takaxp/org-plist
 ;; Package-Requires: ((emacs "25.1"))
@@ -65,7 +65,7 @@
                          (setq result (eval plist)))
                      (user-error "variable `%s' is not loaded" plist)))))
       ;; visual feedback and send the result to `org-ctrl-c-ctrl-c'
-      (when result (message "%s" result)))))
+      (when result (message "%S" result)))))
 
 (defun org-plist--get-options (key)
   "Hoge.
@@ -81,10 +81,14 @@ OPTIONS"
   (with-temp-buffer
     (insert options)
     (goto-char (point-min))
-    (while (re-search-forward "\\([^: ]+\\):\\(\(.+?\)\\|\".+?\"\\|[^ ]+\\)" nil t)
-      (let ((key (match-string 1))
-            (value (match-string 2)))
-        (plist-put plist (intern (concat ":" key)) (intern value))))))
+    (while (re-search-forward "\\([^: ]+\\):\\(\(\\(.+?\\)\)\\|\"\\(.+?\\)\"\\|[^ ]+\\)" nil t)
+      (let ((key (match-string-no-properties 1))
+            (value (match-string-no-properties 2))
+            (st (match-string-no-properties 3))
+            (se (match-string-no-properties 4)))
+        (if (or st se)
+            (error "--- string and sexp are not supported yet")
+          (plist-put plist (intern (concat ":" key)) (intern value)))))))
 
 (add-hook 'org-ctrl-c-ctrl-c-hook #'org-plist)
 
