@@ -4,7 +4,7 @@
 
 ;; Author: Takaaki ISHIKAWA <takaxp at ieee dot org>
 ;; Keywords: convenience
-;; Version: 0.0.1
+;; Version: 0.0.2
 ;; Maintainer: Takaaki ISHIKAWA <takaxp at ieee dot org>
 ;; URL: https://github.com/takaxp/org-plist
 ;; Package-Requires: ((emacs "25.1"))
@@ -81,7 +81,7 @@ OPTIONS"
   (with-temp-buffer
     (insert options)
     (goto-char (point-min))
-    (while (re-search-forward "\\([^: ]+\\):\\([^ ]+\\)" nil t)
+    (while (re-search-forward "\\([^: ]+\\):\\(\(.+?\)\\|\".+?\"\\|[^ ]+\\)" nil t)
       (let ((key (match-string 1))
             (value (match-string 2)))
         (plist-put plist (intern (concat ":" key)) (intern value))))))
