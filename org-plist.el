@@ -37,7 +37,7 @@
 ;;; Code:
 
 (eval-when-compile
-  (require 'cl-lib nil t))
+  (require 'cl-lib))
 
 (defgroup org-plist nil
   "Hoge."
@@ -57,7 +57,7 @@
           (result nil))
       (cl-loop for op in org-plist-dict do
                (when (equal key (nth 0 op))
-                 (let ((options (org-plist--find-key key))
+                 (let ((options (org-plist--get-options key))
                        (plist (intern-soft (nth 1 op))))
                    (if (and (boundp plist) plist)
                        (when options
@@ -67,7 +67,7 @@
       ;; visual feedback and send the result to `org-ctrl-c-ctrl-c'
       (when result (message "%s" result)))))
 
-(defun org-plist--find-key (key)
+(defun org-plist--get-options (key)
   "Hoge.
 KEY"
   (let ((element (org-element-at-point)))
