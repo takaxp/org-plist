@@ -45,8 +45,8 @@
 
 (defcustom org-plist-dict nil
   "Hoge."
-  :type (choice (alist :value-type (group string string))
-                (alist :value-type (group string symbol)))
+  :type '(choice '(alist :value-type (group string string))
+                 '(alist :value-type (group string symbol)))
   :group 'org-plist)
 
 ;;;###autoload
