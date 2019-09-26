@@ -1,0 +1,17 @@
+#+title: org-plist
+
+* Configure
+
+#+begin_src emacs-lisp
+(when (require 'org-plist nil t)
+    (add-to-list 'org-plist-dict '("OPTIONS_FOO" "org-foo-options"))
+    (add-to-list 'org-plist-dict '("OPTIONS_BAR" org-bar-options)))
+#+end_src
+
+* Usage
+
+#+begin_src org
+#+options_foo: key1:value1 ;; C-c C-c here! then values of `org-foo-options' will be updated
+#+options_bar: key2:value2 ;; C-c C-c here! then values of `org-bar-options' will be updated
+#+end_src
+
