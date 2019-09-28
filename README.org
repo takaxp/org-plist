@@ -4,8 +4,10 @@
 
 #+begin_src emacs-lisp
 (when (require 'org-plist nil t)
-    (add-to-list 'org-plist-dict '("OPTIONS_FOO" "org-foo-options"))
-    (add-to-list 'org-plist-dict '("OPTIONS_BAR" org-bar-options)))
+  (add-to-list 'org-plist-dict '("OPTIONS_FOO" "foo-options"))
+  (add-to-list 'org-plist-dict '("OPTIONS_BAR" bar-options))
+  (add-to-list 'org-plist-dict '("OPTIONS_HOGEHOGE" hogehoge-options))
+  (add-to-list 'org-plist-dict '("OPTIONS_HOGE" "hoge-options")))
 #+end_src
 
 * Usage
