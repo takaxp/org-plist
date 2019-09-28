@@ -81,14 +81,10 @@ OPTIONS"
   (with-temp-buffer
     (insert options)
     (goto-char (point-min))
-    (while (re-search-forward "\\([^: ]+\\):\\(\(\\(.+?\\)\)\\|\"\\(.+?\\)\"\\|[^ ]+\\)" nil t)
+    (while (re-search-forward "\\([^: ]+\\):\\(\(.+?\)\\|\".+?\"\\|[^ ]+\\)" nil t)
       (let ((key (match-string-no-properties 1))
-            (value (match-string-no-properties 2))
-            (st (match-string-no-properties 3))
-            (se (match-string-no-properties 4)))
-        (if (or st se)
-            (error "--- string and sexp are not supported yet")
-          (plist-put plist (intern (concat ":" key)) (intern value)))))))
+            (value (match-string-no-properties 2)))
+        (plist-put plist (intern (concat ":" key)) (read value))))))
 
 (add-hook 'org-ctrl-c-ctrl-c-hook #'org-plist)
 
