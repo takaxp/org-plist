@@ -11,7 +11,9 @@
 * Usage
 
 #+begin_src org
-#+options_foo: key1:value1 ;; C-c C-c here! then values of `org-foo-options' will be updated
-#+options_bar: key2:value2 ;; C-c C-c here! then values of `org-bar-options' will be updated
+#+options_foo: key1:value1 ;; C-c C-c on this line! then values of `org-foo-options' will be updated
+#+options_bar: key2:value2 ;; C-c C-c on this line! then values of `org-bar-options' will be updated
+#+options_hogehoge: key1:nil key2:"value2" key3:"hoge \\(hoge\\) hoge" ;; C-c C-c on this line!
+#+options_hoge: key1:t key2:value2 key3:("begin" "$1" "$" "$$" "\\(" "\\[") ;; C-c C-c on this line!
 #+end_src
 
