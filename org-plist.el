@@ -53,11 +53,12 @@
 (defun org-plist ()
   "Hoge."
   (when org-plist-dict
-    (let ((key (org-element-property :key (org-element-at-point)))
-          (result nil))
+    (let* ((element (org-element-at-point))
+           (key (org-element-property :key element))
+           (result nil))
       (cl-loop for op in org-plist-dict do
                (when (equal key (nth 0 op))
-                 (let ((options (org-plist--get-options key))
+                 (let ((options (org-element-property :value element))
                        (plist (intern-soft (nth 1 op))))
                    (if (and (boundp plist) plist)
                        (when options
@@ -66,13 +67,6 @@
                      (user-error "Variable `%s' is not loaded" plist)))))
       ;; visual feedback and send the result to `org-ctrl-c-ctrl-c'
       (when result (message "%S" result)))))
-
-(defun org-plist--get-options (key)
-  "Hoge.
-KEY"
-  (let ((element (org-element-at-point)))
-    (when (equal (org-element-property :key element) key)
-      (org-element-property :value element))))
 
 (defun org-plist--update (plist options)
   "Hoge.
